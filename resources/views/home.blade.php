@@ -15,6 +15,19 @@
         </div>
     </div>
 
+
+    @php
+        function stars($vote)
+        {
+            $vote = round($vote, 0);
+            $stars = '';
+            for ($i = 0; $i < 10; $i++) {
+                $i < $vote ? ($stars .= '★') : ($stars .= '☆');
+            }
+            return $stars;
+        }
+    @endphp
+
     <div class="container">
         <div class="row row-cols-3 g-3 py-4">
             @foreach ($movies as $movie)
@@ -28,8 +41,9 @@
                             <p class="card-text">{{ $movie['nationality'] }}</p>
                             <p class="card-text">{{ $movie['date'] }}</p>
                         </div>
-                        <hr>
-                        <p class="card-text text-center">{{ $movie['vote'] }}</p>
+                        <hr class="m-0">
+                        <p class="card-text text-center bg-cyan text-cyan py-2">
+                            {{ stars($movie['vote']) . '(' . $movie['vote'] . ')' }}</p>
                     </div>
                 </div>
             @endforeach
